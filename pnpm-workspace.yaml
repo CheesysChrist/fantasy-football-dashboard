@@ -8,6 +8,13 @@ overrides:
   '@ux-lib-csr/nestjs-utils': 'file:./vendor/ux-lib-csr/ux-lib-csr-nestjs-utils-0.0.1.tgz'
   '@ux-lib-csr/tokens': 'file:./vendor/ux-lib-csr/ux-lib-csr-tokens-0.0.1.tgz'
 
+minimumReleaseAgeExclude:
+  - '@ux-lib-csr/angular-ui'
+  - '@ux-lib-csr/angular-utils'
+  - '@ux-lib-csr/contracts'
+  - '@ux-lib-csr/nestjs-utils'
+  - '@ux-lib-csr/tokens'
+
 allowBuilds:
 
   '@nestjs/core': true
