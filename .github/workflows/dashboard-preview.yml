@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feat/sleeper-waivers-adapter
+      - fix/ci-private-pages-and-pnpm
       - main
   pull_request:
   workflow_dispatch:
@@ -37,15 +38,36 @@ jobs:
       - name: Run Angular unit tests
         run: pnpm nx test fantasy-angular
 
+      - name: Build production dashboard bundle
+        run: pnpm nx build fantasy-angular --configuration=production
+
       - name: Run dashboard preview E2E
         run: pnpm nx run fantasy-angular-e2e:e2e
 
-      - name: Upload dashboard preview artifact
+      - name: Upload dashboard preview screenshot
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: dashboard-preview
+          name: dashboard-preview-screenshot
           path: |
             apps/fantasy-angular-e2e/test-results/dashboard-preview.png
             apps/fantasy-angular-e2e/apps/fantasy-angular-e2e/test-results/dashboard-preview.png
+          if-no-files-found: warn
+
+      - name: Upload dashboard preview Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashboard-preview-report
+          path: |
+            apps/fantasy-angular-e2e/test-output/playwright/report
+            .nx/cache/*/apps/fantasy-angular-e2e/test-output/playwright/report
+          if-no-files-found: warn
+
+      - name: Upload dashboard production bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashboard-production-bundle
+          path: dist/apps/fantasy-angular/browser
           if-no-files-found: warn
