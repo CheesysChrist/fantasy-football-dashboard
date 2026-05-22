@@ -41,23 +41,25 @@ Use this when you want a clickable private preview URL.
 - optional demo/fallback data only
 
 ### One-time VPS setup
-1. Copy `docs/nginx-fantasy-preview.conf` to your nginx sites config and adapt the hostname.
-2. Create the target directory:
-   - `sudo mkdir -p /var/www/fantasy-dashboard-preview`
-3. Create a basic-auth password file:
-   - `sudo apt-get install apache2-utils`
-   - `sudo htpasswd -c /etc/nginx/.htpasswd-fantasy-preview your-preview-user`
-4. Test and reload nginx:
-   - `sudo nginx -t`
-   - `sudo systemctl reload nginx`
+1. Copy `.env.preview.example` to `.env.preview` and fill in your private values.
+2. Install required packages on the VPS:
+   - `sudo apt-get update`
+   - `sudo apt-get install -y nginx apache2-utils rsync`
+3. Run the one-time setup script on the VPS:
+   - `set -a && source ./.env.preview && set +a`
+   - `./scripts/setup-preview-nginx.sh`
+4. If you prefer to inspect the generated config directly, use `docs/nginx-fantasy-preview.conf` as the reference output.
 
 ### Deploying a new preview build
-1. Build the app:
+1. Load your local preview variables:
+   - `set -a && source ./.env.preview && set +a`
+2. Build the app:
    - `pnpm install --frozen-lockfile`
    - `pnpm nx build fantasy-angular --configuration=production`
-2. Sync it to the VPS:
-   - `PREVIEW_HOST=your-vps.example.com PREVIEW_USER=deploy PREVIEW_PATH=/var/www/fantasy-dashboard-preview ./scripts/deploy-preview.sh`
-3. Open the protected preview URL and log in with your basic-auth credentials.
+3. Sync it to the VPS:
+   - `./scripts/deploy-preview.sh`
+4. Open the protected preview URL and log in with your basic-auth credentials.
+5. For the full end-to-end checklist, see `docs/private-vps-preview-runbook.md`.
 
 ### Why this is safe
 - preview stays off the public internet in practice

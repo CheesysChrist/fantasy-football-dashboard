@@ -41,3 +41,7 @@ Thumbs.db
 vitest.config.*.timestamp*
 __screenshots__/
 test-output
+test-results
+
+# local preview deployment config
+.env.preview
