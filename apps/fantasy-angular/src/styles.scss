@@ -1,0 +1,18 @@
+@use '@ux-lib-csr/tokens/src/scss/theme' as ux;
+@use '@ux-lib-csr/tokens/src/scss/material-theme' as ux-material;
+
+@include ux-material.ux-material-light-theme();
+
+html, body { min-height: 100%; }
+body { margin: 0; @include ux.ux-light-theme(); }
+* { box-sizing: border-box; }
+
+.ux-button {
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em;
+}
+.ux-button--sm { min-height: 32px; padding-inline: 8px !important; }
+.ux-button--md { min-height: 40px; padding-inline: 16px !important; }
+.ux-button--lg { min-height: 48px; padding-inline: 24px !important; }
+.ux-button--loading { opacity: 0.72; cursor: progress; }

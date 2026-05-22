@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "files": [],
+  "references": [
+    {
+      "path": "./apps/fantasy-angular-e2e"
+    },
+    {
+      "path": "./apps/fantasy-api-e2e"
+    },
+    {
+      "path": "./apps/fantasy-api"
+    },
+    {
+      "path": "./apps/fantasy-angular"
+    }
+  ]
+}

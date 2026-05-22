@@ -1,0 +1,12 @@
+<mat-toolbar class="app-shell__toolbar">
+  <span class="app-shell__brand">Gridiron UX</span>
+  <nav>
+    <a mat-button uxButton uxVariant="secondary" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+    <a mat-button uxButton uxVariant="secondary" routerLink="/standings" routerLinkActive="active">Standings</a>
+    <a mat-button uxButton uxVariant="secondary" routerLink="/waivers" routerLinkActive="active">Waivers</a>
+    <a mat-button uxButton uxVariant="secondary" routerLink="/lineup" routerLinkActive="active">Lineup</a>
+  </nav>
+</mat-toolbar>
+<main class="app-shell__content">
+  <router-outlet />
+</main>

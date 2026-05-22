@@ -1,0 +1,23 @@
+packages:
+  - 'apps/*'
+
+overrides:
+  '@ux-lib-csr/angular-ui': 'file:./vendor/ux-lib-csr/ux-lib-csr-angular-ui-0.0.1.tgz'
+  '@ux-lib-csr/angular-utils': 'file:./vendor/ux-lib-csr/ux-lib-csr-angular-utils-0.0.1.tgz'
+  '@ux-lib-csr/contracts': 'file:./vendor/ux-lib-csr/ux-lib-csr-contracts-0.0.1.tgz'
+  '@ux-lib-csr/nestjs-utils': 'file:./vendor/ux-lib-csr/ux-lib-csr-nestjs-utils-0.0.1.tgz'
+  '@ux-lib-csr/tokens': 'file:./vendor/ux-lib-csr/ux-lib-csr-tokens-0.0.1.tgz'
+
+allowBuilds:
+
+  '@nestjs/core': true
+  '@parcel/watcher': true
+  '@swc/core': true
+  esbuild: true
+  less: true
+  lmdb: true
+  msgpackr-extract: true
+  nx: true
+  unrs-resolver: true
+
+autoInstallPeers: true

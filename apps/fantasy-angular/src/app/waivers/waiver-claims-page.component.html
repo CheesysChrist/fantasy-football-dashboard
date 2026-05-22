@@ -1,0 +1,11 @@
+<h1>Waiver claims</h1>
+<div class="cards">
+  @for (player of waivers$ | async; track player.id) {
+    <ux-dashboard-card [title]="player.name" [eyebrow]="player.position + ' · ' + player.proTeam">
+      <p>{{ player.news }}</p>
+      <p>{{ player.projectedPoints }} projected · {{ player.rosteredPercent }}% rostered</p>
+      <mat-chip>{{ player.claimStatus }}</mat-chip><br>
+      <button matButton="filled" uxButton uxVariant="primary">Add claim</button>
+    </ux-dashboard-card>
+  }
+</div>

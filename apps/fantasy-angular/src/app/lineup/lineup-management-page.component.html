@@ -1,0 +1,21 @@
+<ux-dashboard-card title="Lineup management" eyebrow="Week 11">
+  <p>Review starters and save your mock lineup.</p>
+
+  @if (errorMessage) {
+    <ux-alert title="Could not save lineup" variant="danger">{{ errorMessage }}</ux-alert>
+  }
+
+  @if (lineup$ | async; as lineup) {
+    @for (entry of lineup.entries; track entry.slot) {
+      <div class="slot">
+        <strong>{{ entry.slot }}</strong>
+        <span>{{ entry.player?.name ?? 'Open slot' }}</span>
+        <small>{{ entry.player?.projectedPoints ?? 0 }} pts</small>
+      </div>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <button matButton="filled" uxButton uxVariant="primary" type="submit">Save lineup</button>
+    </form>
+  }
+</ux-dashboard-card>

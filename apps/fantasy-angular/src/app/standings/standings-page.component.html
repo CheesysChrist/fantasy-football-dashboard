@@ -1,0 +1,31 @@
+<ux-dashboard-card title="League standings" eyebrow="Playoff race">
+  <table mat-table [dataSource]="(standings$ | async) ?? []">
+    <ng-container matColumnDef="rank">
+      <th mat-header-cell *matHeaderCellDef>Rank</th>
+      <td mat-cell *matCellDef="let row">#{{ row.rank }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="team">
+      <th mat-header-cell *matHeaderCellDef>Team</th>
+      <td mat-cell *matCellDef="let row"><strong>{{ row.teamName }}</strong><br><small>{{ row.managerName }}</small></td>
+    </ng-container>
+
+    <ng-container matColumnDef="record">
+      <th mat-header-cell *matHeaderCellDef>Record</th>
+      <td mat-cell *matCellDef="let row">{{ row.record }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="points">
+      <th mat-header-cell *matHeaderCellDef>PF / PA</th>
+      <td mat-cell *matCellDef="let row">{{ row.pointsFor | number:'1.1-1' }} / {{ row.pointsAgainst | number:'1.1-1' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="playoffs">
+      <th mat-header-cell *matHeaderCellDef>Playoffs</th>
+      <td mat-cell *matCellDef="let row">{{ row.playoffProbability }}%</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns"></tr>
+  </table>
+</ux-dashboard-card>
