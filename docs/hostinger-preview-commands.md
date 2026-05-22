@@ -152,6 +152,25 @@ pnpm nx build fantasy-angular --configuration=production
 ./scripts/deploy-preview.sh
 ```
 
+Or use the new one-command local bootstrap helper:
+
+```bash
+./scripts/bootstrap-preview.sh --deploy-only --skip-install
+```
+
+For a first-time end-to-end setup from your local machine, use:
+
+```bash
+./scripts/bootstrap-preview.sh --full-setup
+```
+
+That will:
+- optionally verify DNS
+- copy the VPS setup script
+- run the VPS package/nginx/basic-auth setup over SSH
+- build the app
+- deploy the bundle
+
 ## 10. Rotate the preview password later
 
 On the VPS:

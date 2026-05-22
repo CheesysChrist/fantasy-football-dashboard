@@ -157,6 +157,20 @@ pnpm nx build fantasy-angular --configuration=production
 ./scripts/deploy-preview.sh
 ```
 
+Or use the one-command helper:
+
+```bash
+./scripts/bootstrap-preview.sh --deploy-only --skip-install
+```
+
+For a first-time guided run from your local machine:
+
+```bash
+./scripts/bootstrap-preview.sh --full-setup
+```
+
+This helper loads `.env.preview`, can verify DNS, can copy/run the VPS setup script, then builds and deploys.
+
 ## Secret-safety notes
 
 - Do not commit `.env.preview`.
