@@ -47,4 +47,5 @@ jobs:
           name: dashboard-preview
           path: |
             apps/fantasy-angular-e2e/test-results/dashboard-preview.png
+            apps/fantasy-angular-e2e/apps/fantasy-angular-e2e/test-results/dashboard-preview.png
           if-no-files-found: warn
