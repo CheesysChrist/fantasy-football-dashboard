@@ -120,6 +120,16 @@ chmod +x ./scripts/deploy-preview.sh
 ./scripts/deploy-preview.sh
 ```
 
+Important:
+- Running `./scripts/bootstrap-preview.sh` with no flags is not a first-time VPS setup.
+- For the first end-to-end run, use:
+
+```bash
+./scripts/bootstrap-preview.sh --full-setup
+```
+
+- Running it with no flags skips the nginx/basic-auth server setup step.
+
 Or without sourcing the env file:
 
 ```bash

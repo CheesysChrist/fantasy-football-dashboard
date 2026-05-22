@@ -121,6 +121,16 @@ set +a
 ./scripts/deploy-preview.sh
 ```
 
+Important:
+- Running `./scripts/bootstrap-preview.sh` with no flags is not a full first-time server setup.
+- For the first end-to-end run, use:
+
+```bash
+./scripts/bootstrap-preview.sh --full-setup
+```
+
+- Plain `./scripts/bootstrap-preview.sh` only handles the local build/deploy path and skips nginx/basic-auth setup on the VPS.
+
 ## 8. Open the preview
 
 Open in a browser:

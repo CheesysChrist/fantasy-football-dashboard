@@ -35,6 +35,7 @@ DO_VPS_SETUP=false
 DO_BUILD=true
 DO_DEPLOY=true
 SKIP_INSTALL=false
+MODE_LABEL="default"
 
 usage() {
   cat <<'EOF'
@@ -69,10 +70,12 @@ while [[ $# -gt 0 ]]; do
       DO_VPS_SETUP=true
       DO_BUILD=true
       DO_DEPLOY=true
+      MODE_LABEL="full-setup"
       ;;
     --deploy-only)
       DO_BUILD=true
       DO_DEPLOY=true
+      MODE_LABEL="deploy-only"
       ;;
     --dns-check)
       DO_DNS_CHECK=true
@@ -127,6 +130,21 @@ require_cmd scp
 require_cmd rsync
 require_cmd bash
 
+echo "Preview bootstrap mode: $MODE_LABEL"
+echo "Target host: $PREVIEW_HOST"
+echo "Target path: $PREVIEW_PATH"
+echo "Planned steps:"
+[[ "$DO_DNS_CHECK" == true ]] && echo "- DNS check" || echo "- DNS check: skipped"
+[[ "$DO_COPY_SETUP" == true ]] && echo "- Copy VPS setup script" || echo "- Copy VPS setup script: skipped"
+[[ "$DO_VPS_SETUP" == true ]] && echo "- VPS setup" || echo "- VPS setup: skipped"
+[[ "$DO_BUILD" == true ]] && echo "- Local build" || echo "- Local build: skipped"
+[[ "$DO_DEPLOY" == true ]] && echo "- Deploy bundle" || echo "- Deploy bundle: skipped"
+
+if [[ "$MODE_LABEL" == "default" ]]; then
+  echo "Note: default mode does NOT configure nginx/basic auth on the VPS."
+  echo "For a first-time setup, run: ./scripts/bootstrap-preview.sh --full-setup"
+fi
+
 if [[ "$DO_DNS_CHECK" == true ]]; then
   if command -v dig >/dev/null 2>&1; then
     echo "Checking DNS for $PREVIEW_HOST"
@@ -167,6 +185,7 @@ fi
 if [[ "$DO_DEPLOY" == true ]]; then
   echo "Deploying preview bundle"
   "$REPO_ROOT/scripts/deploy-preview.sh"
+  echo "Deploy finished. If this is the first run, confirm VPS setup and DNS are done."
 fi
 
 echo "Preview bootstrap completed successfully."
