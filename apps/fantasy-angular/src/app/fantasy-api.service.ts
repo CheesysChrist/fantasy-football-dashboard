@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { CurrentGame, FantasyPlayer, LeagueSummary, Lineup, Standing, WaiverPlayer } from '@ux-lib-csr/contracts';
+import { CurrentGame, FantasyPlayer, LeagueSummary, Lineup, NflState, Standing, WaiverPlayer } from '@ux-lib-csr/contracts';
 
 const API_BASE = 'http://localhost:3000';
 
@@ -10,6 +10,7 @@ export class FantasyApiService {
 
   currentGames() { return this.http.get<CurrentGame[]>(`${API_BASE}/games/current`); }
   leagueSummary() { return this.http.get<LeagueSummary>(`${API_BASE}/league/summary`); }
+  leagueNflState() { return this.http.get<NflState>(`${API_BASE}/league/nfl-state`); }
   standings() { return this.http.get<Standing[]>(`${API_BASE}/standings`); }
   waivers() { return this.http.get<WaiverPlayer[]>(`${API_BASE}/waivers`); }
   rosterPreview() { return this.http.get<FantasyPlayer[]>(`${API_BASE}/roster/preview`); }

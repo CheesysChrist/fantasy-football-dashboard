@@ -1,10 +1,22 @@
 <section class="hero">
-  <p>Week 11 Live</p>
+  @if (nflState$ | async; as nflState) {
+    <p>{{ nflState.season }} season · Week {{ nflState.week }} · {{ nflState.seasonType }}</p>
+  } @else {
+    <p>Live NFL state loading…</p>
+  }
   <h1>Fantasy football command center</h1>
   <span>Monitor current games, lineup risk, and league movement in one focused workspace.</span>
 </section>
 
 <div class="grid">
+  <ux-dashboard-card title="NFL state" eyebrow="Sleeper-backed NFL state">
+    @if (nflState$ | async; as nflState) {
+      <div class="summary-stat"><strong>W{{ nflState.week }}</strong><span>{{ nflState.seasonType }}</span></div>
+      <p>{{ nflState.season }} season live from the backend adapter.</p>
+      <small>Falls back to safe demo state if Sleeper is unavailable.</small>
+    }
+  </ux-dashboard-card>
+
   <ux-dashboard-card title="League summary" eyebrow="Your team">
     @if (summary$ | async; as summary) {
       <div class="summary-stat"><strong>#{{ summary.rank }}</strong><span>{{ summary.teamName }}</span></div>
