@@ -135,8 +135,8 @@ The script uses rsync with `--delete`, so the remote preview directory mirrors t
 
 Open:
 
-- `http://your-preview-domain/`
-- or `https://your-preview-domain/` after TLS is configured
+- `http://prev.fantasy.dashboard/`
+- or `https://prev.fantasy.dashboard/` after TLS is configured
 
 Check:
 - basic-auth prompt appears

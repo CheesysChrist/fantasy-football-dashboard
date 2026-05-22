@@ -34,7 +34,7 @@ What it verifies:
 Use this when you want a clickable private preview URL.
 
 ### Recommended setup
-- preview hostname: `fantasy-preview.example.com`
+- preview hostname: `prev.fantasy.dashboard`
 - deploy path: `/var/www/fantasy-dashboard-preview`
 - nginx basic auth enabled
 - no production secrets in browser code
