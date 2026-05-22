@@ -1,4 +1,4 @@
-import { CurrentGame, FantasyPlayer, LeagueSummary, Lineup, Standing, WaiverPlayer } from '@ux-lib-csr/contracts';
+import { CurrentGame, FantasyPlayer, LeagueSummary, Lineup, NflState, Standing, WaiverPlayer } from '@ux-lib-csr/contracts';
 
 export const currentGames: CurrentGame[] = [
   {
@@ -55,6 +55,12 @@ export const waivers: WaiverPlayer[] = [
   { id: 'w2', name: 'Jalen Cross', position: 'WR', proTeam: 'MIA', projectedPoints: 10.9, status: 'healthy', news: 'Deep threat with favorable matchup.', rosteredPercent: 37, claimStatus: 'pending' },
   { id: 'w3', name: 'Owen Price', position: 'TE', proTeam: 'SEA', projectedPoints: 7.4, status: 'questionable', news: 'Streaming option if active.', rosteredPercent: 18, claimStatus: 'available' },
 ];
+
+export const defaultNflState: NflState = {
+  season: '2026',
+  week: 1,
+  seasonType: 'regular',
+};
 
 export const lineup: Lineup = {
   week: 11,

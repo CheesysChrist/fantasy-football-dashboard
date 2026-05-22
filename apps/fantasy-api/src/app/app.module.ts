@@ -7,10 +7,11 @@ import { LineupController } from './lineup.controller';
 import { RosterController } from './roster.controller';
 import { StandingsController } from './standings.controller';
 import { WaiversController } from './waivers.controller';
+import { SleeperFantasyService } from './sleeper-fantasy.service';
 
 @Module({
   imports: [],
   controllers: [AppController, GamesController, LeagueController, StandingsController, WaiversController, RosterController, LineupController],
-  providers: [AppService],
+  providers: [AppService, SleeperFantasyService],
 })
 export class AppModule {}
