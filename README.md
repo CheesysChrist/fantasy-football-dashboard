@@ -80,6 +80,29 @@ pnpm build
 pnpm e2e
 ```
 
+## Docker / VPS manager deployment
+
+The repo now includes a Docker-managed deployment path with:
+- `Dockerfile.frontend` for the Angular UI served by nginx
+- `Dockerfile.api` for the NestJS backend
+- `docker-compose.yml` for Portainer/Dockge/Coolify-style stack deployment
+- `docker/nginx.frontend.conf` to proxy `/api/*` to the internal API container
+
+Quick start:
+
+```bash
+docker compose up --build
+```
+
+Then open:
+
+```text
+http://localhost:8080
+```
+
+Detailed manager instructions:
+- `docs/docker-manager-deploy.md`
+
 ## Local development
 
 Frontend:

@@ -1,0 +1,25 @@
+# syntax=docker/dockerfile:1.7
+
+FROM node:22-alpine AS build
+WORKDIR /app
+
+RUN corepack enable
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml nx.json tsconfig.base.json tsconfig.json ./
+COPY vendor ./vendor
+COPY apps ./apps
+
+RUN pnpm install --frozen-lockfile
+RUN pnpm nx build fantasy-api --configuration=production
+
+FROM node:22-alpine AS runtime
+WORKDIR /app
+ENV NODE_ENV=production
+ENV PORT=3000
+
+COPY --from=build /app/package.json ./package.json
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/apps/fantasy-api/dist ./apps/fantasy-api/dist
+
+EXPOSE 3000
+CMD ["node", "apps/fantasy-api/dist/main.js"]

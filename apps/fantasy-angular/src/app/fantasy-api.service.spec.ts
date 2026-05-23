@@ -27,7 +27,7 @@ describe('FantasyApiService', () => {
       result = value;
     });
 
-    const request = httpController.expectOne('http://localhost:3000/games/current');
+    const request = httpController.expectOne('/api/games/current');
     request.flush('backend unavailable', { status: 503, statusText: 'Service Unavailable' });
 
     expect(result).toEqual([
@@ -45,7 +45,7 @@ describe('FantasyApiService', () => {
       completed = true;
     });
 
-    const request = httpController.expectOne('http://localhost:3000/lineup');
+    const request = httpController.expectOne('/api/lineup');
     expect(request.request.method).toBe('POST');
     request.flush('backend unavailable', { status: 503, statusText: 'Service Unavailable' });
 

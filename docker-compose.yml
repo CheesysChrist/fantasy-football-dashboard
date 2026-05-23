@@ -1,0 +1,23 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: fantasy-api
+    environment:
+      PORT: 3000
+      NODE_ENV: production
+    restart: unless-stopped
+    expose:
+      - "3000"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: fantasy-dashboard
+    depends_on:
+      - api
+    ports:
+      - "8080:80"
+    restart: unless-stopped
