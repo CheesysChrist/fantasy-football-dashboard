@@ -112,7 +112,9 @@ See:
 - `docs/hostinger-preview-commands.md`
 - `docs/private-vps-preview-runbook.md`
 
-## Next cleanup target
+## Packaging bridge status
 
 The repo boundary is already separate and clean at the repository level.
-The next maturity step, when ready, is to replace the temporary tarball bridge with published package versions so the app consumes `ux-lib-csr` through a normal package registry flow.
+
+The remaining packaging bridge is still tarball-based because the shared library packages use the `@ux-lib-csr/*` scope, which does not currently map to a GitHub Packages user/org namespace for `CheesysChrist`.
+Until that scope or registry strategy changes, this app continues to consume vendored tarball artifacts rather than registry-published package versions.
