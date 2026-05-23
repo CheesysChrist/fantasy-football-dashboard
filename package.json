@@ -90,11 +90,11 @@
     "zone.js": "^0.16.2"
   },
   "dependencies": {
-    "axios": "^1.6.0",
     "@ux-lib-csr/angular-ui": "file:./vendor/ux-lib-csr/ux-lib-csr-angular-ui-0.0.1.tgz",
     "@ux-lib-csr/angular-utils": "file:./vendor/ux-lib-csr/ux-lib-csr-angular-utils-0.0.1.tgz",
-    "@ux-lib-csr/contracts": "file:./vendor/ux-lib-csr/ux-lib-csr-contracts-0.0.1.tgz",
+    "@ux-lib-csr/contracts": "file:vendor/ux-lib-csr/ux-lib-csr-contracts-0.0.1.tgz",
     "@ux-lib-csr/nestjs-utils": "file:./vendor/ux-lib-csr/ux-lib-csr-nestjs-utils-0.0.1.tgz",
-    "@ux-lib-csr/tokens": "file:./vendor/ux-lib-csr/ux-lib-csr-tokens-0.0.1.tgz"
+    "@ux-lib-csr/tokens": "file:./vendor/ux-lib-csr/ux-lib-csr-tokens-0.0.1.tgz",
+    "axios": "^1.6.0"
   }
 }

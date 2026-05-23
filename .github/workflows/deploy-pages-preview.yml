@@ -1,0 +1,13 @@
+name: deploy-pages-preview
+
+on:
+  workflow_dispatch:
+
+jobs:
+  disabled:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Explain why Pages deployment is disabled
+        run: |
+          echo "GitHub Pages is unavailable for this private repository on the current plan."
+          echo "Make the repository public or upgrade to GitHub Enterprise to enable Pages."

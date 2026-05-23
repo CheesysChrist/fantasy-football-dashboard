@@ -7,6 +7,9 @@ const swcJestConfig = JSON.parse(
 
 // Disable .swcrc look-up by SWC core because we're passing in swcJestConfig ourselves
 swcJestConfig.swcrc = false;
+swcJestConfig.module = {
+  type: 'commonjs',
+};
 
 module.exports = {
   displayName: 'fantasy-api',
@@ -15,6 +18,7 @@ module.exports = {
   transform: {
     '^.+\\.[tj]s$': ['@swc/jest', swcJestConfig],
   },
+  transformIgnorePatterns: ['node_modules/(?!.*@ux-lib-csr/contracts)'],
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: 'test-output/jest/coverage',
 };

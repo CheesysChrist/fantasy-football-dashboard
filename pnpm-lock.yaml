@@ -17,7 +17,7 @@ importers:
     dependencies:
       '@ux-lib-csr/angular-ui':
         specifier: file:vendor/ux-lib-csr/ux-lib-csr-angular-ui-0.0.1.tgz
-        version: file:vendor/ux-lib-csr/ux-lib-csr-angular-ui-0.0.1.tgz(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.2))(@angular/material@21.2.12(ab0b385370d4356422a9421f6c83f0c2))
+        version: file:vendor/ux-lib-csr/ux-lib-csr-angular-ui-0.0.1.tgz(@angular/common@21.2.14(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.2))(rxjs@7.8.2))(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.2))(@angular/material@21.2.12(ab0b385370d4356422a9421f6c83f0c2))
       '@ux-lib-csr/angular-utils':
         specifier: file:vendor/ux-lib-csr/ux-lib-csr-angular-utils-0.0.1.tgz
         version: file:vendor/ux-lib-csr/ux-lib-csr-angular-utils-0.0.1.tgz(@angular/common@21.2.14(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.2))(rxjs@7.8.2))(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.2))(@angular/platform-browser@21.2.14(@angular/animations@21.2.14(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.2)))(@angular/common@21.2.14(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.2))(rxjs@7.8.2))(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.2)))(rxjs@7.8.2)
@@ -3985,9 +3985,10 @@ packages:
     os: [win32]
 
   '@ux-lib-csr/angular-ui@file:vendor/ux-lib-csr/ux-lib-csr-angular-ui-0.0.1.tgz':
-    resolution: {integrity: sha512-J+hxVghsz9OgJULCTiyOQXsJyuGb+IMmcp5WjNwdIjt1SlJK0p9ttiVBR5cU165L98HDkxSyh8kZ71IgWRF06w==, tarball: file:vendor/ux-lib-csr/ux-lib-csr-angular-ui-0.0.1.tgz}
+    resolution: {integrity: sha512-hoDPh4TrXfBGzImV3bp6BrSuUWHEVE45eUwYbfAvLWGQOmydaAnd/3kZ4apPH1CmPfYecESVRz3ASJCHsAQZMw==, tarball: file:vendor/ux-lib-csr/ux-lib-csr-angular-ui-0.0.1.tgz}
     version: 0.0.1
     peerDependencies:
+      '@angular/common': ^21.2.0
       '@angular/core': ^21.2.0
       '@angular/material': ^21.2.0
 
@@ -3996,7 +3997,7 @@ packages:
     version: 0.0.1
 
   '@ux-lib-csr/contracts@file:vendor/ux-lib-csr/ux-lib-csr-contracts-0.0.1.tgz':
-    resolution: {integrity: sha512-tZwWsiGF9iupKyIlMe6vR8IoSJJM812MKXaPMVR8Q/H2qt4JP6JdJuD8UZ32wYN8SCykH8np16jjOLHMbC3+uw==, tarball: file:vendor/ux-lib-csr/ux-lib-csr-contracts-0.0.1.tgz}
+    resolution: {integrity: sha512-YuGNa4h9CHl5k8XAkEstOlFj6VcZpxysxL/3j2wbCeW4tBxFpQTzv8wYcMzuQ1zPMgaaPlzUxbS62O51e0kgvA==, tarball: file:vendor/ux-lib-csr/ux-lib-csr-contracts-0.0.1.tgz}
     version: 0.0.1
 
   '@ux-lib-csr/nestjs-utils@file:vendor/ux-lib-csr/ux-lib-csr-nestjs-utils-0.0.1.tgz':
@@ -4004,7 +4005,7 @@ packages:
     version: 0.0.1
 
   '@ux-lib-csr/tokens@file:vendor/ux-lib-csr/ux-lib-csr-tokens-0.0.1.tgz':
-    resolution: {integrity: sha512-ysY22+IQ27aLiLWGK7SRlCxbF4fF6/WFrJ/LVHBeLQ1POHKH7yDAohzFOIhIBgnFAPAm7Nnrzcn6foghc8PMxA==, tarball: file:vendor/ux-lib-csr/ux-lib-csr-tokens-0.0.1.tgz}
+    resolution: {integrity: sha512-S4Jjd91f4mcDsIC7iL67zk4PXIIBzXZGJwewRcsPOUjX/3M/97sEK3JTrNZIBI/xSwYa4Esu8QZg/SGAHMkxNg==, tarball: file:vendor/ux-lib-csr/ux-lib-csr-tokens-0.0.1.tgz}
     version: 0.0.1
 
   '@verdaccio/auth@8.0.1':
@@ -13758,8 +13759,9 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.12.2':
     optional: true
 
-  '@ux-lib-csr/angular-ui@file:vendor/ux-lib-csr/ux-lib-csr-angular-ui-0.0.1.tgz(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.2))(@angular/material@21.2.12(ab0b385370d4356422a9421f6c83f0c2))':
+  '@ux-lib-csr/angular-ui@file:vendor/ux-lib-csr/ux-lib-csr-angular-ui-0.0.1.tgz(@angular/common@21.2.14(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.2))(rxjs@7.8.2))(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.2))(@angular/material@21.2.12(ab0b385370d4356422a9421f6c83f0c2))':
     dependencies:
+      '@angular/common': 21.2.14(@angular/core@21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.2))(rxjs@7.8.2)
       '@angular/core': 21.2.14(@angular/compiler@21.2.14)(rxjs@7.8.2)(zone.js@0.16.2)
       '@angular/material': 21.2.12(ab0b385370d4356422a9421f6c83f0c2)
       tslib: 2.8.1

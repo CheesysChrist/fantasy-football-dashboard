@@ -2,7 +2,7 @@ import { AsyncPipe, DecimalPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatChipsModule } from '@angular/material/chips';
 import { UxDashboardCardComponent } from '@ux-lib-csr/angular-ui';
-import { CurrentGame, FantasyPlayer, LeagueSummary } from '@ux-lib-csr/contracts';
+import { CurrentGame, FantasyPlayer, LeagueSummary, NflState } from '@ux-lib-csr/contracts';
 import { Observable } from 'rxjs';
 import { FantasyApiService } from '../fantasy-api.service';
 
@@ -14,7 +14,10 @@ import { FantasyApiService } from '../fantasy-api.service';
   styleUrl: './current-games-dashboard.component.scss',
 })
 export class CurrentGamesDashboardComponent {
-  protected readonly games$: Observable<CurrentGame[]> = inject(FantasyApiService).currentGames();
-  protected readonly summary$: Observable<LeagueSummary> = inject(FantasyApiService).leagueSummary();
-  protected readonly roster$: Observable<FantasyPlayer[]> = inject(FantasyApiService).rosterPreview();
+  private readonly fantasyApi = inject(FantasyApiService);
+
+  protected readonly games$: Observable<CurrentGame[]> = this.fantasyApi.currentGames();
+  protected readonly summary$: Observable<LeagueSummary> = this.fantasyApi.leagueSummary();
+  protected readonly roster$: Observable<FantasyPlayer[]> = this.fantasyApi.rosterPreview();
+  protected readonly nflState$: Observable<NflState> = this.fantasyApi.leagueNflState();
 }

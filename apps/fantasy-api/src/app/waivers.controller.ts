@@ -1,10 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
-import { waivers } from './fantasy-data';
+import { SleeperFantasyService } from './sleeper-fantasy.service';
 
 @Controller('waivers')
 export class WaiversController {
+  constructor(private readonly sleeperFantasyService: SleeperFantasyService) {}
+
   @Get()
   getWaivers() {
-    return waivers;
+    return this.sleeperFantasyService.getTrendingWaivers();
   }
 }
