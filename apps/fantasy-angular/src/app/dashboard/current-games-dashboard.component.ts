@@ -2,9 +2,9 @@ import { AsyncPipe, DecimalPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatChipsModule } from '@angular/material/chips';
 import { UxDashboardCardComponent } from '@ux-lib-csr/angular-ui';
-import { CurrentGame, FantasyPlayer, LeagueSummary, NflState } from '@ux-lib-csr/contracts';
 import { Observable } from 'rxjs';
 import { FantasyApiService } from '../fantasy-api.service';
+import { FantasyNightDashboard } from '../fantasy-night-dashboard';
 
 @Component({
   selector: 'app-current-games-dashboard',
@@ -16,8 +16,5 @@ import { FantasyApiService } from '../fantasy-api.service';
 export class CurrentGamesDashboardComponent {
   private readonly fantasyApi = inject(FantasyApiService);
 
-  protected readonly games$: Observable<CurrentGame[]> = this.fantasyApi.currentGames();
-  protected readonly summary$: Observable<LeagueSummary> = this.fantasyApi.leagueSummary();
-  protected readonly roster$: Observable<FantasyPlayer[]> = this.fantasyApi.rosterPreview();
-  protected readonly nflState$: Observable<NflState> = this.fantasyApi.leagueNflState();
+  protected readonly dashboard$: Observable<FantasyNightDashboard> = this.fantasyApi.nightDashboard();
 }

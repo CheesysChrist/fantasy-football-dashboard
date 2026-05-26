@@ -25,7 +25,7 @@ export default defineConfig({
   webServer: {
     command: 'pnpm exec nx run fantasy-angular:serve',
     url: 'http://localhost:4200',
-    reuseExistingServer: true,
+    reuseExistingServer: false,
     cwd: workspaceRoot,
   },
   projects: [

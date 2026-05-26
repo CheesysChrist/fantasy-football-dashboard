@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { DashboardController } from './dashboard.controller';
 import { GamesController } from './games.controller';
 import { LeagueController } from './league.controller';
 import { LineupController } from './lineup.controller';
@@ -11,7 +12,7 @@ import { SleeperFantasyService } from './sleeper-fantasy.service';
 
 @Module({
   imports: [],
-  controllers: [AppController, GamesController, LeagueController, StandingsController, WaiversController, RosterController, LineupController],
+  controllers: [AppController, DashboardController, GamesController, LeagueController, StandingsController, WaiversController, RosterController, LineupController],
   providers: [AppService, SleeperFantasyService],
 })
 export class AppModule {}
