@@ -125,10 +125,15 @@ pnpm nx build fantasy-angular --configuration=production
 
 ## Preview and verification
 
-This repo includes safe preview support for reviewing the application without making it public:
+This repo includes safe preview support for reviewing the application and sharing progress quickly:
 - GitHub Actions screenshot/report artifacts
 - production bundle artifacts
+- GitHub Pages deployment for the public repo
 - optional password-protected VPS preview helpers
+
+For the public repository, the `deploy-pages-preview` workflow publishes the Angular app to GitHub Pages with a project-site base path and SPA `404.html` fallback.
+Expected URL after Pages is enabled in repository settings:
+- `https://cheesyschrist.github.io/fantasy-football-dashboard/`
 
 See:
 - `docs/preview-verification.md`
