@@ -80,6 +80,29 @@ pnpm build
 pnpm e2e
 ```
 
+## Docker / VPS manager deployment
+
+The repo now includes a Docker-managed deployment path with:
+- `Dockerfile.frontend` for the Angular UI served by nginx
+- `Dockerfile.api` for the NestJS backend
+- `docker-compose.yml` for Portainer/Dockge/Coolify-style stack deployment
+- `docker/nginx.frontend.conf` to proxy `/api/*` to the internal API container
+
+Quick start:
+
+```bash
+docker compose up --build
+```
+
+Then open:
+
+```text
+http://localhost:8080
+```
+
+Detailed manager instructions:
+- `docs/docker-manager-deploy.md`
+
 ## Local development
 
 Frontend:
@@ -112,7 +135,9 @@ See:
 - `docs/hostinger-preview-commands.md`
 - `docs/private-vps-preview-runbook.md`
 
-## Next cleanup target
+## Packaging bridge status
 
 The repo boundary is already separate and clean at the repository level.
-The next maturity step, when ready, is to replace the temporary tarball bridge with published package versions so the app consumes `ux-lib-csr` through a normal package registry flow.
+
+The remaining packaging bridge is still tarball-based because the shared library packages use the `@ux-lib-csr/*` scope, which does not currently map to a GitHub Packages user/org namespace for `CheesysChrist`.
+Until that scope or registry strategy changes, this app continues to consume vendored tarball artifacts rather than registry-published package versions.

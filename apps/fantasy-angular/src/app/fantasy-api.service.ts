@@ -4,7 +4,7 @@ import { CurrentGame, FantasyPlayer, LeagueSummary, Lineup, NflState, Standing, 
 import { catchError, of } from 'rxjs';
 import { previewCurrentGames, previewLeagueSummary, previewLineup, previewNflState, previewRoster, previewStandings, previewWaivers } from './preview-data';
 
-const API_BASE = 'http://localhost:3000';
+const API_BASE = '/api';
 
 @Injectable({ providedIn: 'root' })
 export class FantasyApiService {
