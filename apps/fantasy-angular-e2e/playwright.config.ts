@@ -1,5 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 import { nxE2EPreset } from '@nx/playwright/preset';
+import { workspaceRoot } from '@nx/devkit';
 
 // For CI, you may want to set BASE_URL to the deployed application.
 const baseURL = process.env['BASE_URL'] || 'http://localhost:4200';
@@ -21,9 +22,12 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
-  // Nx already starts the fantasy-angular serve target for the inferred e2e task.
-  // Keeping a Playwright-managed webServer here causes duplicate server startups
-  // and port conflicts in CI/local runs of `nx run fantasy-angular-e2e:e2e`.
+  webServer: {
+    command: 'pnpm exec nx run fantasy-angular:serve',
+    url: 'http://localhost:4200',
+    reuseExistingServer: true,
+    cwd: workspaceRoot,
+  },
   projects: [
     {
       name: 'chromium',

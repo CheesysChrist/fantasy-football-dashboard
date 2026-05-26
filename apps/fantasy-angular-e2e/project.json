@@ -4,6 +4,35 @@
   "projectType": "application",
   "sourceRoot": "apps/fantasy-angular-e2e/src",
   "implicitDependencies": ["fantasy-angular"],
-  "// targets": "to see all targets run: nx show project fantasy-angular-e2e --web",
-  "targets": {}
+  "targets": {
+    "preview-e2e": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/fantasy-angular-e2e",
+        "command": "playwright test"
+      },
+      "cache": true,
+      "inputs": [
+        "default",
+        "^production",
+        "^{projectRoot}/tsconfig*.json",
+        {
+          "json": "{workspaceRoot}/tsconfig.json",
+          "fields": ["compilerOptions", "extends", "files", "include"]
+        },
+        {
+          "externalDependencies": ["@playwright/test"]
+        }
+      ],
+      "outputs": [
+        "{projectRoot}/test-output/playwright/output",
+        "{projectRoot}/test-output/playwright/report",
+        "{projectRoot}/test-results"
+      ],
+      "metadata": {
+        "technologies": ["playwright"],
+        "description": "Runs Playwright preview tests with a Playwright-managed dev server"
+      }
+    }
+  }
 }

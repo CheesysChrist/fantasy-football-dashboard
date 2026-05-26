@@ -42,7 +42,7 @@ jobs:
         run: pnpm nx build fantasy-angular --configuration=production
 
       - name: Run dashboard preview E2E
-        run: pnpm nx run fantasy-angular-e2e:e2e
+        run: pnpm nx run fantasy-angular-e2e:preview-e2e
 
       - name: Upload dashboard preview screenshot
         if: always()
