@@ -13,7 +13,7 @@ This repository is meant to stay focused on the *application layer*.
 It assembles the fantasy football user experience by combining:
 - fantasy-specific routes, pages, and product flows
 - fantasy-specific backend endpoints and provider integrations
-- preview and verification workflows for safely reviewing the app UI
+- preview and verification workflows for reviewing the app UI
 - externally consumed shared packages from the `ux-lib-csr` library repo
 
 In practical terms, this repo is where product behavior lives:
@@ -40,7 +40,7 @@ Application-specific code should stay here, for example:
 - fantasy routes and page composition
 - feature wiring for waivers, lineup, standings, and dashboards
 - provider adapters and backend orchestration specific to the fantasy app
-- app preview setup, deployment glue, and end-to-end verification
+- app verification and deployment workflows
 
 ## Repository layout
 
@@ -52,8 +52,7 @@ apps/
   fantasy-api-e2e/       Backend integration/E2E tests
 vendor/ux-lib-csr/       Temporary packed shared library tarballs
 .github/workflows/       CI and preview workflows
-scripts/                 Preview/bootstrap/deploy helpers
-docs/                    Preview and deployment documentation
+scripts/                 Helper scripts
 ```
 
 ## Dependency bridge
@@ -80,29 +79,6 @@ pnpm build
 pnpm e2e
 ```
 
-## Docker / VPS manager deployment
-
-The repo now includes a Docker-managed deployment path with:
-- `Dockerfile.frontend` for the Angular UI served by nginx
-- `Dockerfile.api` for the NestJS backend
-- `docker-compose.yml` for Portainer/Dockge/Coolify-style stack deployment
-- `docker/nginx.frontend.conf` to proxy `/api/*` to the internal API container
-
-Quick start:
-
-```bash
-docker compose up --build
-```
-
-Then open:
-
-```text
-http://localhost:8080
-```
-
-Detailed manager instructions:
-- `docs/docker-manager-deploy.md`
-
 ## Local development
 
 Frontend:
@@ -125,20 +101,14 @@ pnpm nx build fantasy-angular --configuration=production
 
 ## Preview and verification
 
-This repo includes safe preview support for reviewing the application and sharing progress quickly:
+This repo includes GitHub-based preview support for reviewing the application and sharing progress quickly:
 - GitHub Actions screenshot/report artifacts
 - production bundle artifacts
 - GitHub Pages deployment for the public repo
-- optional password-protected VPS preview helpers
 
 For the public repository, the `deploy-pages-preview` workflow publishes the Angular app to GitHub Pages with a project-site base path and SPA `404.html` fallback.
 Expected URL after Pages is enabled in repository settings:
 - `https://cheesyschrist.github.io/fantasy-football-dashboard/`
-
-See:
-- `docs/preview-verification.md`
-- `docs/hostinger-preview-commands.md`
-- `docs/private-vps-preview-runbook.md`
 
 ## Packaging bridge status
 
