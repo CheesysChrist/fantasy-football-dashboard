@@ -119,6 +119,6 @@ describe('SleeperFantasyService', () => {
     const service = new SleeperFantasyService();
 
     await expect(service.getNflState()).resolves.toEqual({ season: '2026', week: 8, seasonType: 'post' });
-    await expect(service.getNflState()).resolves.toEqual({ season: '2026', week: 1, seasonType: 'regular' });
+    await expect(service.getNflState()).resolves.toEqual({ season: '2026', week: 14, seasonType: 'regular' });
   });
 });

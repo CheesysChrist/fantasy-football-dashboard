@@ -18,8 +18,16 @@
   }
 }
 
+.hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
 .grid,
-.games {
+.games,
+.player-columns {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 18px;
@@ -27,11 +35,28 @@
 }
 
 .row,
-.score {
+.score,
+.player-row {
   display: flex;
   justify-content: space-between;
   gap: 16px;
   margin: 10px 0;
+}
+
+.player-row {
+  align-items: center;
+
+  small {
+    display: block;
+  }
+}
+
+.points {
+  text-align: right;
+
+  small {
+    display: block;
+  }
 }
 
 .summary-stat {

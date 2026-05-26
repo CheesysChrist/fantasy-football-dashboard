@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { CurrentGame, FantasyPlayer, LeagueSummary, Lineup, NflState, Standing, WaiverPlayer } from '@ux-lib-csr/contracts';
 import { catchError, of } from 'rxjs';
-import { previewCurrentGames, previewLeagueSummary, previewLineup, previewNflState, previewRoster, previewStandings, previewWaivers } from './preview-data';
+import { FantasyNightDashboard } from './fantasy-night-dashboard';
+import { previewCurrentGames, previewFantasyNightDashboard, previewLeagueSummary, previewLineup, previewNflState, previewRoster, previewStandings, previewWaivers } from './preview-data';
 
 const API_BASE = '/api';
 
@@ -17,5 +18,6 @@ export class FantasyApiService {
   waivers() { return this.http.get<WaiverPlayer[]>(`${API_BASE}/waivers`).pipe(catchError(() => of(previewWaivers))); }
   rosterPreview() { return this.http.get<FantasyPlayer[]>(`${API_BASE}/roster/preview`).pipe(catchError(() => of(previewRoster))); }
   lineup() { return this.http.get<Lineup>(`${API_BASE}/lineup`).pipe(catchError(() => of(previewLineup))); }
+  nightDashboard() { return this.http.get<FantasyNightDashboard>(`${API_BASE}/dashboard/night`).pipe(catchError(() => of(previewFantasyNightDashboard))); }
   saveLineup(playerIds: string[]) { return this.http.post(`${API_BASE}/lineup`, { playerIds }).pipe(catchError(() => of({ saved: true }))); }
 }

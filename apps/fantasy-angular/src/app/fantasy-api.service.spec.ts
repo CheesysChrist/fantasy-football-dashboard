@@ -30,12 +30,45 @@ describe('FantasyApiService', () => {
     const request = httpController.expectOne('/api/games/current');
     request.flush('backend unavailable', { status: 503, statusText: 'Service Unavailable' });
 
-    expect(result).toEqual([
+    expect(result).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: 'game-det-chi',
+          fantasyImpact: expect.stringContaining('Jahmyr Gibbs'),
+        }),
+      ])
+    );
+  });
+
+  it('falls back to preview night dashboard data when the aggregate request fails', () => {
+    let result: unknown;
+
+    service.nightDashboard().subscribe((value) => {
+      result = value;
+    });
+
+    const request = httpController.expectOne('/api/dashboard/night');
+    request.flush('backend unavailable', { status: 503, statusText: 'Service Unavailable' });
+
+    expect(result).toEqual(
       expect.objectContaining({
-        id: 'game-1',
-        fantasyImpact: expect.stringContaining('Mason Cole'),
-      }),
-    ]);
+        liveGames: expect.arrayContaining([
+          expect.objectContaining({
+            id: 'game-det-chi',
+            awayTeam: expect.objectContaining({ abbreviation: 'DET' }),
+            homeTeam: expect.objectContaining({ abbreviation: 'CHI' }),
+          }),
+        ]),
+        matchup: expect.objectContaining({
+          managerName: 'Chrise',
+          projectedDelta: expect.any(Number),
+        }),
+        positionLeaders: expect.arrayContaining([
+          expect.objectContaining({ position: 'QB' }),
+          expect.objectContaining({ position: 'RB' }),
+        ]),
+      })
+    );
   });
 
   it('falls back to a successful preview save response when lineup save fails', () => {

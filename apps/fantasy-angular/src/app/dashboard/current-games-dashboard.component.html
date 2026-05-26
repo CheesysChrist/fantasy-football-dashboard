@@ -1,45 +1,100 @@
-<section class="hero">
-  @if (nflState$ | async; as nflState) {
-    <p>{{ nflState.season }} season · Week {{ nflState.week }} · {{ nflState.seasonType }}</p>
-  } @else {
-    <p>Live NFL state loading…</p>
-  }
-  <h1>Fantasy football command center</h1>
-  <span>Monitor current games, lineup risk, and league movement in one focused workspace.</span>
-</section>
+@if (dashboard$ | async; as dashboard) {
+  <section class="hero">
+    <p>{{ dashboard.nflState.season }} season · Week {{ dashboard.nflState.week }} · {{ dashboard.nflState.seasonType }}</p>
+    <h1>Fantasy football command center</h1>
+    <span>Track tonight's NFL action through the lens of your matchup, projections, and standings swing.</span>
 
-<div class="grid">
-  <ux-dashboard-card title="NFL state" eyebrow="Sleeper-backed NFL state">
-    @if (nflState$ | async; as nflState) {
-      <div class="summary-stat"><strong>W{{ nflState.week }}</strong><span>{{ nflState.seasonType }}</span></div>
-      <p>{{ nflState.season }} season live from the backend adapter.</p>
-      <small>Falls back to safe demo state if Sleeper is unavailable.</small>
-    }
-  </ux-dashboard-card>
+    <div class="hero-chips">
+      <mat-chip>Live games: {{ dashboard.meta.liveGameCount }}</mat-chip>
+      <mat-chip>My players active: {{ dashboard.meta.myPlayersActive }}</mat-chip>
+      <mat-chip>Opponent players active: {{ dashboard.meta.opponentPlayersActive }}</mat-chip>
+      <mat-chip>Updated {{ dashboard.meta.lastUpdated }}</mat-chip>
+    </div>
+  </section>
 
-  <ux-dashboard-card title="League summary" eyebrow="Your team">
-    @if (summary$ | async; as summary) {
-      <div class="summary-stat"><strong>#{{ summary.rank }}</strong><span>{{ summary.teamName }}</span></div>
-      <p>{{ summary.record }} · {{ summary.projectedPoints | number:'1.1-1' }} projected · waiver #{{ summary.waiverPriority }}</p>
-      <small>Next up: {{ summary.upcomingOpponent }}</small>
-    }
-  </ux-dashboard-card>
-
-  <ux-dashboard-card title="Roster watch" eyebrow="Starters">
-    @for (player of roster$ | async; track player.id) {
-      <div class="row"><strong>{{ player.position }} {{ player.name }}</strong><span>{{ player.projectedPoints }} pts</span></div>
-    }
-  </ux-dashboard-card>
-</div>
-
-<h2>Current games</h2>
-<div class="games">
-  @for (game of games$ | async; track game.id) {
-    <ux-dashboard-card [title]="game.awayTeam.abbreviation + ' @ ' + game.homeTeam.abbreviation" [eyebrow]="game.quarter + ' · ' + game.clock">
-      <div class="score"><span>{{ game.awayTeam.city }} {{ game.awayTeam.name }}</span><strong>{{ game.awayTeam.score }}</strong></div>
-      <div class="score"><span>{{ game.homeTeam.city }} {{ game.homeTeam.name }}</span><strong>{{ game.homeTeam.score }}</strong></div>
-      <mat-chip>{{ game.status }}</mat-chip>
-      <p>{{ game.fantasyImpact }}</p>
+  <div class="grid">
+    <ux-dashboard-card title="Projected edge" eyebrow="Tonight's matchup swing">
+      <div class="summary-stat">
+        <strong>{{ dashboard.matchup.projectedDelta | number:'1.1-1' }}</strong>
+        <span>projected margin</span>
+      </div>
+      <div class="row"><span>{{ dashboard.matchup.teamName }}</span><strong>{{ dashboard.matchup.myLivePoints | number:'1.1-1' }} live</strong></div>
+      <div class="row"><span>{{ dashboard.matchup.opponentTeamName }}</span><strong>{{ dashboard.matchup.opponentLivePoints | number:'1.1-1' }} live</strong></div>
+      <p>{{ dashboard.matchup.myProjectedPoints | number:'1.1-1' }} projected vs {{ dashboard.matchup.opponentProjectedPoints | number:'1.1-1' }}</p>
+      <small>{{ dashboard.matchup.trendNote }}</small>
     </ux-dashboard-card>
-  }
-</div>
+
+    <ux-dashboard-card title="League impact" eyebrow="Standings pressure">
+      <div class="summary-stat">
+        <strong>#{{ dashboard.leagueImpact.projectedRank }}</strong>
+        <span>projected rank</span>
+      </div>
+      <p>Current rank #{{ dashboard.leagueImpact.currentRank }} · playoff odds {{ dashboard.leagueImpact.playoffOdds }}%</p>
+      <small>{{ dashboard.leagueImpact.movementSummary }}</small>
+    </ux-dashboard-card>
+  </div>
+
+  <h2>Live NFL games</h2>
+  <div class="games">
+    @for (game of dashboard.liveGames; track game.id) {
+      <ux-dashboard-card [title]="game.awayTeam.abbreviation + ' @ ' + game.homeTeam.abbreviation" [eyebrow]="game.quarter + ' · ' + game.clock">
+        <div class="score"><span>{{ game.awayTeam.city }} {{ game.awayTeam.name }}</span><strong>{{ game.awayTeam.score }}</strong></div>
+        <div class="score"><span>{{ game.homeTeam.city }} {{ game.homeTeam.name }}</span><strong>{{ game.homeTeam.score }}</strong></div>
+        <mat-chip>{{ game.status }}</mat-chip>
+        <p>{{ game.headline }}</p>
+        <small>{{ game.fantasyImpact }}</small>
+      </ux-dashboard-card>
+    }
+  </div>
+
+  <h2>Top performers by position</h2>
+  <div class="grid">
+    @for (leader of dashboard.positionLeaders; track leader.position) {
+      <ux-dashboard-card [title]="leader.position" eyebrow="Position leader">
+        <div class="summary-stat">
+          <strong>{{ leader.fantasyPoints | number:'1.1-1' }}</strong>
+          <span>pts</span>
+        </div>
+        <p>{{ leader.playerName }} · {{ leader.team }}</p>
+        <small>{{ leader.note }}</small>
+      </ux-dashboard-card>
+    }
+  </div>
+
+  <div class="player-columns">
+    <ux-dashboard-card title="My active players" eyebrow="Tonight's exposure">
+      @for (player of dashboard.myActivePlayers; track player.id) {
+        <div class="player-row">
+          <div>
+            <strong>{{ player.slot }} · {{ player.playerName }}</strong>
+            <small>{{ player.nflTeam }} · {{ player.trend }}</small>
+          </div>
+          <div class="points">
+            <strong>{{ player.livePoints | number:'1.1-1' }}</strong>
+            <small>vs {{ player.projectedPoints | number:'1.1-1' }}</small>
+          </div>
+        </div>
+      }
+    </ux-dashboard-card>
+
+    <ux-dashboard-card title="Opponent active players" eyebrow="What you're sweating">
+      @for (player of dashboard.opponentActivePlayers; track player.id) {
+        <div class="player-row">
+          <div>
+            <strong>{{ player.slot }} · {{ player.playerName }}</strong>
+            <small>{{ player.nflTeam }} · {{ player.trend }}</small>
+          </div>
+          <div class="points">
+            <strong>{{ player.livePoints | number:'1.1-1' }}</strong>
+            <small>vs {{ player.projectedPoints | number:'1.1-1' }}</small>
+          </div>
+        </div>
+      }
+    </ux-dashboard-card>
+  </div>
+} @else {
+  <section class="hero">
+    <p>Live NFL state loading…</p>
+    <h1>Fantasy football command center</h1>
+  </section>
+}
