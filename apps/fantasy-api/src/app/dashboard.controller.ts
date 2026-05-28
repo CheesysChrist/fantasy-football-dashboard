@@ -1,10 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
-import { fantasyNightDashboard } from './fantasy-data';
+import { DashboardDataService } from './dashboard/dashboard-data.service';
 
 @Controller('dashboard')
 export class DashboardController {
+  constructor(private readonly dashboardDataService: DashboardDataService) {}
+
   @Get('night')
   getNightDashboard() {
-    return fantasyNightDashboard;
+    return this.dashboardDataService.getNightDashboard();
   }
 }

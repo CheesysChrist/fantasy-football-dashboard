@@ -93,6 +93,20 @@ Backend:
 pnpm nx serve fantasy-api
 ```
 
+Provider selection for the dashboard backend currently defaults to demo mode and is designed to be expanded with real providers:
+
+```bash
+LIVE_NFL_PROVIDER=demo
+FANTASY_LEAGUE_PROVIDER=demo
+pnpm nx serve fantasy-api
+```
+
+Planned provider names already reserved in config:
+- `LIVE_NFL_PROVIDER=demo|espn`
+- `FANTASY_LEAGUE_PROVIDER=demo|sleeper|nfl`
+
+At the moment, any unimplemented provider name safely falls back to `demo`.
+
 Production frontend build:
 
 ```bash
